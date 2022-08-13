@@ -11,7 +11,7 @@
       @close="handleClose"
 
     >
-       <h3>后台管理系统</h3>
+       <h3 v-show="isShow">后台管理系统</h3>
        <el-menu-item v-for="item in onchildren" :index="item.path" :key="item.path" @click="ToClick(item.path)">
         <i :class="'el-icon-' + item.icon"></i>
         <span slot="title">{{item.label}}</span>
@@ -84,6 +84,9 @@ export default {
       ]
     };
   },
+  created() {
+    this.$bus.$on('changeIsCollapse', v => this.isCollapse = v)
+  },
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -95,6 +98,7 @@ export default {
       // console.log(path);
       this.$router.push(path)
     }
+
   },
   computed: {
     onchildren() {
@@ -102,6 +106,9 @@ export default {
     },
     haschildren() {
       return this.meun.filter(item => item.children)
+    },
+    isShow() {
+      return this.isCollapse ? false : true
     }
   }
 };

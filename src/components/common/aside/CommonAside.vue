@@ -7,20 +7,27 @@
       background-color="#565c64"
       text-color="#fff"
       active-text-color="#ffd04b"
+      @open="handleOpen"
+      @close="handleClose"
+
     >
        <h3>后台管理系统</h3>
-       <el-menu-item v-for="item in onchildren" :index="item.path" :key="item.path">
+       <el-menu-item v-for="item in onchildren" :index="item.path" :key="item.path" @click="ToClick(item.path)">
         <i :class="'el-icon-' + item.icon"></i>
         <span slot="title">{{item.label}}</span>
       </el-menu-item>
+
       <el-submenu v-for="item in haschildren" :index="item.label" :key="item.label">
+
         <template slot="title">
           <i :class="'el-icon-' + item.icon"></i>
           <span slot="title">{{item.label}}</span>
         </template>
+
         <el-menu-item-group v-for="subItem in item.children" :key="subItem.path">
           <el-menu-item :index="subItem.path">{{subItem.label}}</el-menu-item>
         </el-menu-item-group>
+
       </el-submenu>
     </el-menu>
   </div>
@@ -34,7 +41,7 @@ export default {
       isCollapse: false,
       meun: [
         {
-          path: '/',
+          path: '/home',
           name: 'home',
           label: '首页',
           icon: 's-home',
@@ -78,12 +85,16 @@ export default {
     };
   },
   methods: {
-    // handleOpen(key, keyPath) {
-    //   console.log(key, keyPath);
-    // },
-    // handleClose(key, keyPath) {
-    //   console.log(key, keyPath);
-    // }
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    ToClick(path) {
+      // console.log(path);
+      this.$router.push(path)
+    }
   },
   computed: {
     onchildren() {

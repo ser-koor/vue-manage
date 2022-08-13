@@ -6,7 +6,9 @@
       </el-aside>
       <el-container>
         <el-header>Header</el-header>
-        <el-main>Main</el-main>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -30,7 +32,7 @@ export default {
 
 .el-main {
   padding: 0;
-  text-align: center;
+  // text-align: center;
 }
 
 </style>

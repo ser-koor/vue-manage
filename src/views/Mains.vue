@@ -5,7 +5,7 @@
         <common-aside></common-aside>
       </el-aside>
       <el-container>
-        <el-header>
+        <el-header style="height: 45px">
           <common-header></common-header>
         </el-header>
         <el-main>
@@ -31,7 +31,7 @@ export default {
 
 <style lang="less" scoped>
 .el-header {
-  background-color: #999;
+  background-color: #222;
 }
 
 .el-main {

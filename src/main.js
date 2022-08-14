@@ -3,7 +3,7 @@ import App from './App.vue'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/less/index.less'
 import { Container, Header, Aside, Main, Menu, Submenu, MenuItem, MenuItemGroup, Button, Dropdown,
-   DropdownMenu, DropdownItem } from 'element-ui';
+   DropdownMenu, DropdownItem, Row, Col, Card, Table, TableColumn } from 'element-ui';
 import router from '@/router'
 
 Vue.config.productionTip = false
@@ -24,6 +24,11 @@ Vue.use(Button)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Card)
+Vue.use(Table)
+Vue.use(TableColumn)
 
 
 new Vue({

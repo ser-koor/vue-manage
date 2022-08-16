@@ -2,9 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/less/index.less'
+import '@/network/mock.js'
+import router from '@/router'
+
 import { Container, Header, Aside, Main, Menu, Submenu, MenuItem, MenuItemGroup, Button, Dropdown,
    DropdownMenu, DropdownItem, Row, Col, Card, Table, TableColumn } from 'element-ui';
-import router from '@/router'
+
 
 Vue.config.productionTip = false
 

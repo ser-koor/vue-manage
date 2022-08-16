@@ -35,7 +35,9 @@
           </div>
         </el-card>
       </div>
-      <el-card style="height: 235px"></el-card>
+      <el-card style="height: 235px">
+        <div style="height: 235px" ref="echarts"></div>
+      </el-card>
       <div class="graph">
         <el-card style="height: 220px"></el-card>
         <el-card style="height: 220px"></el-card>
@@ -45,50 +47,15 @@
 </template>
 
 <script>
+import { getHome } from "@/network/data.js"
+import * as echarts from 'echarts'
+
 export default {
   name: "Home",
   data() {
     return {
       userImg: require("@/assets/images/user.png"),
-      tableData: [
-          {
-            name: 'oppo',
-            todayBuy: 100,
-            monthBuy: 300,
-            totalBuy: 800
-          },
-          {
-            name: 'vivo',
-            todayBuy: 100,
-            monthBuy: 300,
-            totalBuy: 800
-          },
-          {
-            name: '苹果',
-            todayBuy: 100,
-            monthBuy: 300,
-            totalBuy: 800
-          },
-          {
-            name: '小米',
-            todayBuy: 100,
-            monthBuy: 300,
-            totalBuy: 800
-          },
-          {
-            name: '三星',
-            todayBuy: 100,
-            monthBuy: 300,
-            totalBuy: 800
-          },
-          {
-            name: '魅族',
-           todayBuy: 100,
-            monthBuy: 300,
-            totalBuy: 800
-          }
-        ],
-
+      tableData: [],
       tableLabel: {
           name: '课程',
           todayBuy: '今日购买',
@@ -134,6 +101,39 @@ export default {
         },
       ]
     }
+  },
+  mounted() {
+    getHome().then(res => {
+      const { code, data } = res.data
+      if (code === 20000) {
+        this.tableData = data.tableData;
+        const order = data.orderData;
+        const xData = order.date;
+        const keyArray = Object.keys(order.data[0]);
+        const series = [];
+        keyArray.forEach(item => {
+          series.push({
+            name: item,
+            data: order.data.map(value => value[item]),
+            type: 'line'
+          })
+        });
+        const option = {
+          xAxis: {
+            data: xData
+          },
+          yAxis: {},
+          legend: {
+            data: keyArray
+          },
+          series
+        }
+        //初始化echarts
+        const E = echarts.init(this.$refs.echarts);
+        E.setOption(option)
+      }
+    console.log(res);
+    })
   }
 };
 </script>

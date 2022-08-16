@@ -1,6 +1,6 @@
 <template>
   <el-row class="home" :gutter="24">
-    <el-col :span="8" style="margin-top: 20px">
+    <el-col :span="8">
       <el-card shadow="hover">
         <div class="user">
           <img :src="userImg" alt />
@@ -31,7 +31,7 @@
         </el-table>
       </el-card>
     </el-col>
-    <el-col :span="16" style="margin-top: 20px">
+    <el-col :span="16">
       <div class="hnum">
         <el-card
           v-for="item in countData"
@@ -225,7 +225,7 @@ export default {
         const V = echarts.init(this.$refs.video);
         V.setOption(videoOption)
       }
-      console.log(res);
+      // console.log(res);
     });
   }
 };

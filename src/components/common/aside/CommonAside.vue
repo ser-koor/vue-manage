@@ -14,7 +14,7 @@
       v-for="item in onchildren"
       :index="item.path"
       :key="item.path"
-      @click="ToClick(item.path)"
+      @click="ToClick(item)"
     >
       <i :class="'el-icon-' + item.icon"></i>
       <span slot="title">{{item.label}}</span>
@@ -27,7 +27,7 @@
       </template>
 
       <el-menu-item-group v-for="subItem in item.children" :key="subItem.path">
-        <el-menu-item :index="subItem.path">{{subItem.label}}</el-menu-item>
+        <el-menu-item :index="subItem.path" @click="ToClick(subItem)">{{subItem.label}}</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
   </el-menu>
@@ -89,14 +89,15 @@ export default {
   },
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
-    ToClick(path) {
+    ToClick(item) {
       // console.log(path);
-      this.$router.push(path);
+      this.$router.push(item.path);
+      this.$store.commit('selectMenu', item)
     }
   },
   computed: {

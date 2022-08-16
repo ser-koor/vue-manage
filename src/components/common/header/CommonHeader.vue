@@ -2,7 +2,10 @@
   <header>
     <div class="l-content">
       <el-button plain icon="el-icon-menu" size="mini" @click="changeIsCollapse"></el-button>
-      <h3 style="color: #fff">首页</h3>
+      <!-- <h3 style="color: #fff">首页</h3> -->
+      <el-breadcrumb separator="/" style="margin-left: 15px">
+        <el-breadcrumb-item v-for="item in tags" :key="item.path" :to="{ path: item.path }">{{item.label}}</el-breadcrumb-item>
+      </el-breadcrumb>
     </div>
     <div class="r-content">
       <el-dropdown trigger="hover" size="mini">
@@ -24,7 +27,8 @@ export default {
   data() {
     return {
       UserImg: require('@/assets/images/user.png'),
-      isCollapse: false
+      isCollapse: false,
+      tags: this.$store.state.tabList
     }
   },
   created() {
@@ -35,6 +39,9 @@ export default {
       this.isCollapse = !this.isCollapse
       this.$bus.$emit('changeIsCollapse', this.isCollapse)
     }
+  },
+  computed: {
+
   }
 }
 </script>

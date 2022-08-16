@@ -4,9 +4,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/less/index.less'
 import '@/network/mock.js'
 import router from '@/router'
+import store from '@/store/index'
 
 import { Container, Header, Aside, Main, Menu, Submenu, MenuItem, MenuItemGroup, Button, Dropdown,
-   DropdownMenu, DropdownItem, Row, Col, Card, Table, TableColumn } from 'element-ui';
+   DropdownMenu, DropdownItem, Row, Col, Card, Table, TableColumn, Breadcrumb, BreadcrumbItem, Tag } from 'element-ui';
 
 
 Vue.config.productionTip = false
@@ -32,9 +33,13 @@ Vue.use(Col)
 Vue.use(Card)
 Vue.use(Table)
 Vue.use(TableColumn)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Tag)
 
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')

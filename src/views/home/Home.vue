@@ -118,6 +118,7 @@ export default {
   },
   mounted() {
     getHome().then(res => {
+      console.log(res);
       const { code, data } = res.data;
       if (code === 20000) {
         this.tableData = data.tableData;

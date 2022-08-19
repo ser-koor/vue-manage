@@ -23,14 +23,14 @@
         :inline="true"
         ref="from"
       >
-        <el-button type="primary" @click="getList">搜索</el-button>
+        <el-button type="primary" @click="getList(searchFrom.keyword)">搜索</el-button>
       </common-from>
     </div>
     <common-table
       :tableData="tableData"
       :tableLabel="tableLabel"
       :config="config"
-      @changePage="getList()"
+      @changePage="getList"
       @edit="editUser"
       @del="delUSer"
     ></common-table>
@@ -144,13 +144,13 @@ export default {
     confirm() {
       if (this.operateType === 'edit') {
         this.$http.post('/user/edit', this.operateFrom).then(res => {
-          console.log(res);
+          // console.log(res);
           this.isShow = false
           this.getList()
         })
       } else {
         this.$http.post('/user/add', this.operateFrom).then(res => {
-          console.log(res);
+          // console.log(res);
           this.isShow = false
           this.getList()
         })
@@ -185,8 +185,8 @@ export default {
         page: this.config.page,
         name
       }) .then(({data: res}) => {
-        console.log('sssss',res);
-        this.tableLabel = res.list.map(item => {
+        // console.log('sssss',res);
+        this.tableData = res.list.map(item => {
           item.sexLabel = item.sex === 0 ? '女' : '男'
           return item
         })

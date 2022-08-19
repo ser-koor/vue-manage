@@ -1,4 +1,5 @@
 <template>
+<div>
   <el-row class="home" :gutter="24">
     <el-col :span="8">
       <el-card shadow="hover">
@@ -58,6 +59,8 @@
       </div>
     </el-col>
   </el-row>
+            <router-view></router-view>
+</div>
 </template>
 
 <script>
@@ -118,7 +121,7 @@ export default {
   },
   mounted() {
     getHome().then(res => {
-      console.log(res);
+      // console.log(res);
       const { code, data } = res.data;
       if (code === 20000) {
         this.tableData = data.tableData;

@@ -2,13 +2,12 @@
   <div class="common-table">
     <el-table
       :data="tableData"
-     height="90%"
-     stripe>
+      height="80vh"
+      stripe>
       <el-table-column
       show-overflow-tooltip
       v-for="item in tableLabel"
       :key="item.prop"
-      prop="prop"
       :label="item.label"
       :width="item.width ? item.width : 125">
         <template slot-scope='scope'>
@@ -61,7 +60,7 @@ export default {
     handleEdit(row) {
       this.$emit('edit', row)
     },
-    handleDelete() {
+    handleDelete(row) {
       this.$emit('del', row)
     },
     changePage(page) {

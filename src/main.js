@@ -7,8 +7,7 @@ import http from 'axios'
 import router from '@/router'
 import store from '@/store/index'
 
-import { Container, Header, Aside, Main, Menu, Submenu, MenuItem, MenuItemGroup, Button, Dropdown,
-   DropdownMenu, DropdownItem, Row, Col, Card, Table, TableColumn, Breadcrumb, BreadcrumbItem, Tag, Form, FormItem, Input, Switch, DatePicker, Select, Option, Dialog, Pagination } from 'element-ui';
+import { Container, Header, Aside, Main, Menu, Submenu, MenuItem, MenuItemGroup, Button, Dropdown, DropdownMenu, DropdownItem, Row, Col, Card, Table, TableColumn, Breadcrumb, BreadcrumbItem, Tag, Form, FormItem, Input, Switch, DatePicker, Select, Option, Dialog, Pagination, MessageBox, Message } from 'element-ui';
 
 
 Vue.config.productionTip = false
@@ -18,6 +17,8 @@ Vue.prototype.$bus = new Vue()
 
 //注册全局axios http
 Vue.prototype.$http = http
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$message = Message
 
 Vue.use(Container)
 Vue.use(Header)
@@ -49,8 +50,13 @@ Vue.use(Option)
 Vue.use(Dialog)
 Vue.use(Pagination)
 
+
+
 new Vue({
   render: h => h(App),
   router,
-  store
+  store,
+  created() {
+    store.commit('addMenu', router)
+  }
 }).$mount('#app')

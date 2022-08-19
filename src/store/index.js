@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import user from './user.js'
+import Cookie from 'js-cookie'
 
 Vue.use(Vuex)
 
@@ -13,7 +15,8 @@ Vue.use(Vuex)
         icon: 'home'
       }
     ],
-    currentMenu: null
+    currentMenu: null,
+    menu: []
   },
   mutations: {
     selectMenu(state, payload) {
@@ -29,7 +32,44 @@ Vue.use(Vuex)
     closeTag(state, payload) {
       const result = state.tabList.findIndex(item => item.name === payload.name)
       state.tabList.splice(result, 1)
+    },
+    setMenu(state, val) {
+      state.menu = val;
+      Cookie.set('menu', JSON.stringify(val))
+    },
+    clearMenu(state) {
+      state.menu = [];
+      Cookie.remove('menu')
+    },
+    addMenu(state, router) {
+      if (!Cookie.get('menu')) {
+        return
+      }
+      console.log(Cookie.get('menu'));
+      const menu = JSON.parse(Cookie.get('menu'))
+      state.menu = menu;
+      const menuArray = [];
+      menu.forEach(item => {
+        if (item.children) {
+          item.children = item.children.map(item => {
+            item.component = () => import(`@/views/${item.url}`)
+            return item
+          })
+          menuArray.push(...item.children)
+        } else {
+          item.component = () => import(`@/views/${item.url}`)
+          menuArray.push(item)
+        }
+      });
+      //动态路由添加
+      console.log(menuArray);
+      menuArray.forEach(item => {
+        router.addRoute('Mains', item)
+      })
     }
+  },
+  modules: {
+    user
   }
  })
 

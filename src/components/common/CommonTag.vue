@@ -33,7 +33,7 @@ export default {
       close: 'closeTag'
     }),
     changeMenu(tag) {
-      this.$router.push({name: tag.name})
+      this.$router.push({name: tag.name}).catch(err => err)
     },
     handleClose(tag, index) {
       const length = this.tags.length - 1;
@@ -42,9 +42,9 @@ export default {
         return;
       }
       if (index === length) {
-        this.$router.push(this.tags[index-1].path)
+        this.$router.push(this.tags[index-1].path).catch(err => err)
       } else {
-        this.$router.push(this.tags[index].path)
+        this.$router.push(this.tags[index].path).catch(err => err)
       }
     }
   }

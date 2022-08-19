@@ -7,7 +7,9 @@ const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : co
 export function request(config) {
   const instance = axios.create({
     baseURL: baseUrl,
-    timeout: 5000
+    header: {
+
+    }
   })
   //请求拦截
   instance.interceptors.request.use(config => {
